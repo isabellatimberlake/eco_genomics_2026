@@ -5,3 +5,5 @@
 ## Ecological Genomics Notebook
 
 **Course:** Fall 2026 Ecological Genomics
+
+practiced lab notebook
