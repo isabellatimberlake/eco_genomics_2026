@@ -75,3 +75,51 @@ next, I will use this for real data analysis!
 
 **Notes/Observations:\
 **
+
+------------------------------------------------------------------------
+
+## 9.17.2026- Introducing the study system and how the data was prepared through Illumina
+
+**Working directory:**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files:**
+
+none
+
+**Output files:**
+
+none
+
+**Programs/Dependencies:**
+
+-   R version 4.5.1
+
+-   R-studio
+
+-   Command Shell
+
+**Notes/Observations:**
+
+-   Questions we could ask/hypotheses...
+
+    -   look for changes in GE in response to stressor
+
+    -   change in gene expression through time/generations
+
+    -   which treatment is most impactful
+
+    -   which changes are most stable
+
+    -   what overlaps occur across treatments
+
+    -   Plasticity vs. Adaptive Evolution
+
+    -   Phenotype Integration and correlation with genes
+
+    -   Additive, synergistic, or antagonistic interactions between treatments?
+
+-   Starting with uploading data through DESeq2
+
+-   Looking at raw data Phred Q score, it is good to see letters (such as I)... shows high score... symbols show low scores
