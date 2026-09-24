@@ -146,6 +146,8 @@ none
 
 -   Command Shell
 
+-   DESeq2
+
 **Notes/Observations:**
 
 -   Adding startup to our R directories
@@ -243,3 +245,89 @@ none
     -   ![](myresults/PCA_allGens.png){width="300"}
 
 -   Note on RStudio: dev.off() resets the plot viewing panel
+
+## 9.24.2026- Going over what we have learned
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files**
+
+none
+
+**Output files**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**
+
+1) Where things are
+
+2) How to move around -\> using bash commands
+
+-   PATHs: "\~" is home directory shortcut... "/users/i/t/itimberl", containing "/eco_genomics_projects/eco_genomics_2026/transcriptomics/mydata" (+ /myresults + myscripts)
+
+-   also: "/gpfs1/cl/biol3990" is class directory, containing "transcriptomics/CountsMatrix.txt"
+
+-   also: "gpfs1/cl/ecogen" containing "/sw/setup.sh"
+
+3) How to tell the computer what to do (bash, R, etc)
+
+-   cp = copy
+
+-   tab to complete
+
+4) How to back up and share work -\> Github
+
+Also, played in R to understand basic R functions.
+
+Learned to create sections in an R script
+
+```{r}
+
+# Playing in R ####
+# 4 hashtags adds a section! appears at bottom of script (or cntrl+shift+R)
+
+```
+
+Then, looked at DESeq functions that we looked at on Tuesday.
+
+```{r}
+# Import the counts matrix
+countsTable <- read.table("mydata/salmon.isoform.counts.matrix.filteredAssembly", header=TRUE, row.names=1)
+# parameters of above read.table() function shows my file has a header, row names are the first column
+head(countsTable)
+dim(countsTable)
+# 67916 genes, 38 samples
+```
+
+## 9. .2026- 
+
+-   template
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files**
+
+none
+
+**Output files**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**

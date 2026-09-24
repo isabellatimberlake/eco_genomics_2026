@@ -1,8 +1,8 @@
 ## R script for exploring data using DESeq2
 
-
-
+## beginning ####
 ## Set your working directory
+## setting it to my home directory on the Vacc and transcriptomics section
 setwd("~/eco_genomics_projects/eco_genomics_2026/transcriptomics")
 
 ## Import the libraries that we're likely to need in this session
@@ -19,22 +19,24 @@ library("vsn")
 
 ####################################################
 
-### Import our data
+## Import our data ####
 
 ####################################################
 
 
 # Import the counts matrix
 countsTable <- read.table("mydata/salmon.isoform.counts.matrix.filteredAssembly", header=TRUE, row.names=1)
+# parameters of above read.table() function shows my file has a header, row names are the first column
 head(countsTable)
 dim(countsTable)
+# 67916 genes, 38 samples
 
 countsTableRound <- round(countsTable) # bc DESeq2 doesn't like decimals (and Salmon outputs data with decimals)
 head(countsTableRound)
 
-#import the sample description table
+# import the sample description table
 conds <- read.delim("mydata/ahud_samples_R.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1)
-head(conds)
+print(conds) # prints conds containing sample information and associated metadata
 
 ####################################################
 
@@ -62,7 +64,7 @@ hist(apply(countsTableRound,1,mean),xlim=c(0,1000), ylim=c(0,20000),breaks=10000
 
 ####################################################
 
-### Start working with DESeq2!
+### Start working with DESeq2! ####
 
 ####################################################
 
