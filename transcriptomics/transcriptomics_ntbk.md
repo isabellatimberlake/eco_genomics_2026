@@ -268,9 +268,9 @@ none
 
 **Notes/Observations**
 
-1) Where things are
+1)  Where things are
 
-2) How to move around -\> using bash commands
+2)  How to move around -\> using bash commands
 
 -   PATHs: "\~" is home directory shortcut... "/users/i/t/itimberl", containing "/eco_genomics_projects/eco_genomics_2026/transcriptomics/mydata" (+ /myresults + myscripts)
 
@@ -278,13 +278,13 @@ none
 
 -   also: "gpfs1/cl/ecogen" containing "/sw/setup.sh"
 
-3) How to tell the computer what to do (bash, R, etc)
+3)  How to tell the computer what to do (bash, R, etc)
 
 -   cp = copy
 
 -   tab to complete
 
-4) How to back up and share work -\> Github
+4)  How to back up and share work -\> Github
 
 Also, played in R to understand basic R functions.
 
@@ -308,7 +308,120 @@ dim(countsTable)
 # 67916 genes, 38 samples
 ```
 
-## 9. .2026- 
+## 9.29.2026- Continuing analysis of differential expression with DESeq2
+
+-   Loading counts matrix data, filtering out genes with sparse counts, and subsetting the data into different generations
+-   Summarize results between different groups in the F0 generation
+-   Plot this on scatterplots, MA plots, volcano plots, heatmap
+-   Using vsd and heatmap, grouping together genes that are similar
+-   Plot Euler plot to look at shared DEGs between different groups (just amounts, not specific genes)
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files**
+
+none
+
+**Output files**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+-   DESeq2
+
+**Notes/Observations**
+
+-   dim() stands for dimensions
+
+-   Look only at F0 generation:
+
+    ```{r}
+    # Subset the DESeqDataSet to the specific level of the "generation" factor
+    dds_F0 <- subset(dds, select = generation == 'F0')
+    dim(dds_F0)
+    # [1] 25260    12
+    ```
+
+-   use ?DESeq() to look at the function, its parameters, etc
+
+-   Adjusted p-value vs. regular p-value
+
+    -   adjusts the p-value by weighting it with the number of times that you ran the test... since 5% error on sooooo many samples is many many samples still
+
+-   When running summary on results, receive this output:
+
+    ```         
+    out of 25260 with nonzero total read count
+    adjusted p-value < 0.05
+    LFC > 0 (up)       : 2343, 9.3%
+    LFC < 0 (down)     : 1575, 6.2%
+    outliers [1]       : 22, 0.087%
+    low counts [2]     : 979, 3.9%
+    (mean count < 23)
+    [1] see 'cooksCutoff' argument of ?results
+    [2] see 'independentFiltering' argument of ?results
+    ```
+
+-   What is an MA plot?
+
+    -   x-axis is mean of counts for each gene
+
+    -   y-axis is log fold change... 0 is the ambient baseline, then each point showing how far off the OW group is
+
+    -   blue genes are significant, gray are not
+
+        ![](myresults/F0MAplot9-29.png){width="561"}
+
+-   What is a volcano plot?
+
+    ![](myresults/9-29volcanoplot_F0OWvsAM.png){width="519"}
+
+    -   y-axis shows the significance factor
+
+    -   x-axis shows the log fold change
+
+    -   also shows down regulation and up regulation through color
+
+    -   seeing lots more significant/great enough log fold changes in upregulated genes than down
+
+-   How to look at and isolate differentially expressed genes in a comparison
+
+    ```{r}
+    # For OWA vs AM
+    res_OWAvsAM <- results(dds_F0, name="treatment_OWA_vs_AM", alpha=0.05)
+    res_OWAvsAM <- res_OWAvsAM[order(res_OWAvsAM$padj),]
+    res_OWAvsAM <- res_OWAvsAM[!is.na(res_OWAvsAM$padj),]
+    degs_OWAvsAM <- row.names(res_OWAvsAM[res_OWAvsAM$padj < 0.05,])
+    ```
+
+-   Heatmap
+
+    ![](myresults/F0heatmap9-29.png){width="505"}
+
+-   Euler plot looks at shared DEGs between groups
+
+    ![](myresults/EulerplotF0.png){width="478"}
+
+-   Upset plot
+
+    -   Displays the same information as Euler plot but in a different context
+    -   instead of size of Venn diagram bubble, each bar shows the height/weight of DEGs
+    -   Especially useful if there is more than 3 comparisons
+
+    ![](myresults/UpsetplotF0.png){width="497"}
+
+Questions
+
+-   How are all the samples all together in one matrix?
+
+## 10. .2026-
 
 -   template
 
