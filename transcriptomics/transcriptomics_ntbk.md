@@ -132,11 +132,11 @@ none
 
 **Input files:**
 
-none
+counts data
 
 **Output files:**
 
-none
+\~/eco_genomics_projects/eco_genomics_2026/transcriptomics/myscripts/ahud_DESeq_inclass.R
 
 **Programs/Dependencies:**
 
@@ -322,11 +322,13 @@ dim(countsTable)
 
 **Input files**
 
-none
+counts data
 
 **Output files**
 
 `/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+\~/eco_genomics_projects/eco_genomics_2026/transcriptomics/myscripts/9-26_10-1_ahud_DESeqpt2.R
 
 **Programs/Dependencies**
 
@@ -420,6 +422,69 @@ none
 Questions
 
 -   How are all the samples all together in one matrix?
+
+## 10. 1. 2026- Continuing DESeq2 Analysis pt. 3
+
+-   Making scatterplot to compare the LFC response in OWA vs AM and OW vs AM
+-   Analyzing the scatterplot
+    -   some points could have no significance but large log2fold changes, and can be because there is a lot of variation among biological replicates already (in addition to variation between groups)
+    -   See pattern where points significant in both groups follow y=x line, and if they are only significant in one dimension, they will vary across the opposite axis
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files**
+
+counts data
+
+**Output files**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+\~/eco_genomics_projects/eco_genomics_2026/transcriptomics/myscripts/9-26_10-1_ahud_DESeqpt2.R
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+-   DESeq2
+
+**Notes/Observations**
+
+-   What does results output mean?
+
+    -   baseMean shows the mean number of counts
+
+    -   log2FoldChange: shows positive/negative regulation
+
+    -   lfcSE: how much variation in lfc among variants
+
+    -   test statistic: how significant? also +/-
+
+    -   p-value: how significant is that one gene
+
+    -   p-adj: adjusts p-val for correction factor of how big the dataset is
+
+-   Making the scatterplot
+
+    -   First, changing the data
+
+    -   make a new data frame with gene name (from rownames), padj, and LFC for each of the two comparison groups (OWA vs AM and OW vs AM) and then merge them
+
+    -   filter out rows with missing LFC values, mutating a new column for significance in either group or both (use case_when() as a sort of if_else() function to see if padj is \< .05 in either group or both)
+
+    -   Also calculating the correlation between the two groups' LFCs
+
+    -   Sort the data so that it ranges from neither group on bottom to both significance as the top
+
+        ![](myresults/ScatterplotofOWAvsOWvsAM10-1.png){width="455"}
+
+-   annotate adds whatever text
+
+-   important to add the points with significance on the bottom/last, so that these are shown on the top layer of the graph
 
 ## 10. .2026-
 
