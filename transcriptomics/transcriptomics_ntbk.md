@@ -486,6 +486,78 @@ counts data
 
 -   important to add the points with significance on the bottom/last, so that these are shown on the top layer of the graph
 
+## 10. 6.2026- GO Ontology and WGNCA pt 1
+
+-   Looked at the top gene ontology categories for each comparison to AM at F0
+-   Observed these categories in bubble plots
+-   Began WGCNA... prepared data
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files**
+
+mydata/transcript_universe.csv
+
+mydata/trinotate_annotation_GOblastx_forTopGO.txt
+
+**Output files**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+GOandWGCNAahud106.R
+
+**Programs/Dependencies**
+
+-   R tidyverse 4.5.1
+
+-   R-studio
+
+-   topGo
+
+**Notes/Observations**
+
+-   pulled files from /gpfs1/cl/biol3990/Transcriptomics/GOenrichment
+
+-   Loaded 86,543 genes into GO mapping
+
+-   filter GO results by size
+
+    -   very small categories with very few genes could be sequencing error, random, or too specialized
+
+    -   also filter out very big categories because they are too general or broad
+
+-   Create function to look at gene ontology
+
+    -   pull from gene list and differentially expressed gene in list, then decide if each gene is or not (compare to pval, fisher statistic)
+
+    -   write the results to a GO results file
+
+-   Looking at OW ... see that there is high significance in muscle contraction, skeletal muscle myosin thick filament assembly, also flight
+
+-   Can look at groups/functions of Gene Ontology traits on <https://www.informatics.jax.org/vocab/gene_ontology/GO:0060361>
+
+-   ![](myresults/OAvsAMGOontology.png){width="455"}
+
+-   ![](myresults/OWAvsAMGOontology.png){width="526"}
+
+-   ![](myresults/OWvsAMGOontology.png){width="448"}
+
+-   FOR WGNCA
+
+-   we use dds with all the generations... also do not use treatment as the design for the statistical test... now do a blind test (intercept of 1 in DESeqDataSetFromMatrix() function)
+
+-   Take out outlier genes and use "good samples" based on WGNCA function:
+
+    -   gsg \<- goodSamplesGenes(t(countsTable))
+
+-   Look at dendrogram of samples, PCA to observe patterns, outliers, comminalities between data samples
+
+-   set a soft threshhold... converts strength values to correlation values? makes correlations stronger or weaker to emphasize their differences
+
+-   My session keeps crashing before finish WGNCA
+
 ## 10. .2026-
 
 -   template
