@@ -558,6 +558,48 @@ GOandWGCNAahud106.R
 
 -   My session keeps crashing before finish WGNCA
 
+## 10. 8. 2026- Looking at WGNCA ... non-coding
+
+-   template
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics`
+
+**Input files**
+
+none
+
+**Output files**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/transcriptomics/transcriptomics_ntbk.md`
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**
+
+-   WGCNA clusters similarly behaving genes
+
+-   soft threshold tells a soft outline of clustering number ... creates correlation adjacency matrix
+
+-   "signed" adds positive/negative values into the algorithm to group together up or downregulation
+
+-   we have bwnm.rds object rather than having to run the whole algorithm ourselves
+
+-   eigen vector = pairwise correlation
+
+-   11 modules of genes... look at samples' correlation within that module of genes compared to other samples
+
+-   gray module -\> trash genes that do not fit anywhere else
+
+-   associate phenotypes with gene expression through trait module relationships
+
+-   module gene mapping specifically looks at the genes in one module... get trinity numbers, want to run them through GO analysis
+
 ## 10. .2026-
 
 -   template
