@@ -61,6 +61,8 @@ res_OWAvsAM_F0 <- results(dds_F0, name="treatment_OWA_vs_AM", alpha=0.05)
 res_OWAvsAM_F0 <- res_OWAvsAM_F0[order(res_OWAvsAM_F0$padj),]
 summary(res_OWAvsAM_F0)
 
+
+
 # F4
 dds_F4 <- subset(dds, select = generation == 'F4')
 dim(dds_F4)
@@ -136,4 +138,209 @@ length(intersect(degs_OWAvsAM_F11,ints04)) # 2
 fit1 <- euler(c("F0" = 3637, "F4" = 171, "F11" = 1164, "F0&F4" = 55, "F0&F11" = 224, "F4&F11" = 13, "F0&F4&F11" = 2))
 plot(fit1,  lty = 1:3, quantities = TRUE)
 
+# GO analysis setup ####
+
+# F0
+# making data frame
+F0.df <- as.data.frame(res_OWAvsAM_F0)
+F0.df$fullID <- rownames(F0.df)
+
+parts0 <- strsplit(F0.df$fullID, "::")
+
+F0.df$shortID <- sapply(
+  parts0,
+  function(x) paste(x[1:2], collapse="::")
+)
+
+write.csv(
+  F0.df,
+  "myresults/OWAvsAM_resultsF0HW.csv",
+  row.names = FALSE
+)
+
+
+# F4
+# making data frame
+F4.df <- as.data.frame(res_OWAvsAM_F4)
+F4.df$fullID <- rownames(F4.df)
+
+parts4 <- strsplit(F4.df$fullID, "::")
+
+F4.df$shortID <- sapply(
+  parts4,
+  function(x) paste(x[1:2], collapse="::")
+)
+
+write.csv(
+  F4.df,
+  "myresults/OWAvsAM_resultsF4HW.csv",
+  row.names = FALSE
+)
+
+# F11
+# making data frame
+F11.df <- as.data.frame(res_OWAvsAM_F11)
+F11.df$fullID <- rownames(F11.df)
+
+parts11 <- strsplit(F11.df$fullID, "::")
+
+F11.df$shortID <- sapply(
+  parts11,
+  function(x) paste(x[1:2], collapse="::")
+)
+
+write.csv(
+  F11.df,
+  "myresults/OWAvsAM_resultsF11HW.csv",
+  row.names = FALSE
+)
+
+# GO ANALYSIS ####
+library(topGO)
+mappingFile <- "mydata/trinotate_annotation_GOblastx_forTopGO.txt"
+geneID2GO <- readMappings(
+  file = mappingFile
+)
+# filtering GO terms by size
+allGO <- table(unlist(geneID2GO))
+keepTerms <- names(allGO)[
+  allGO >= 5 &
+    allGO <= 500
+]
+
+geneID2GO.filtered <- lapply(
+  geneID2GO,
+  function(x) intersect(x, keepTerms)
+)
+
+geneID2GO.filtered <- geneID2GO.filtered[
+  lengths(geneID2GO.filtered) > 0
+]
+
+## FUNCTION for running Top Go analysis ####
+run_topGO_contrast <- function(
+    infile,
+    outfile,
+    ontology = "BP",
+    padj.cutoff = 0.05){
+  
+  deseq <- read.csv(
+    infile,
+    stringsAsFactors = FALSE
+  )
+  
+  deseq <- subset(
+    deseq,
+    !is.na(padj)
+  )
+  
+  geneList <- factor(
+    as.integer(deseq$padj < padj.cutoff)
+  )
+  
+  names(geneList) <- deseq$shortID
+  
+  cat("\nGenes tested:",
+      length(geneList))
+  
+  cat("\nSignificant genes:",
+      sum(geneList == 1),
+      "\n")
+  
+  GOdata <- new(
+    "topGOdata",
+    ontology = ontology,
+    allGenes = geneList,
+    geneSelectionFun = function(x) x == 1,
+    annot = annFUN.gene2GO,
+    gene2GO = geneID2GO.filtered
+  )
+  
+  resultWeight <- runTest(
+    GOdata,
+    algorithm = "weight01",
+    statistic = "fisher"
+  )
+  
+  GOresults <- GenTable(
+    GOdata,
+    weightFisher = resultWeight,
+    orderBy = "weightFisher",
+    topNodes = 100
+  )
+  write.csv(
+    GOresults,
+    outfile,
+    row.names = FALSE
+  )
+  
+  return(GOresults)
+}
+
+# running top go
+GO_F0 <- run_topGO_contrast(
+  "myresults/OWAvsAM_resultsF0HW.csv",
+  "myresults/GO_F0.csv"
+)
+GO_F4 <- run_topGO_contrast(
+  "myresults/OWAvsAM_resultsF4HW.csv",
+  "myresults/GO_F4.csv"
+)
+GO_F11 <- run_topGO_contrast(
+  "myresults/OWAvsAM_resultsF11HW.csv",
+  "myresults/GO_F11.csv"
+)
+
+# F11, F4, F0
+# Read TopGO results ###
+go <- read.csv(
+  "myresults/GO_F0.csv",
+  stringsAsFactors = FALSE
+)
+
+# Convert p-values to numeric
+go$weightFisher <- gsub("^<\\s*", "", go$weightFisher)
+
+go$weightFisher <- as.numeric(go$weightFisher)
+
+# Convert counts to numeric
+go$Significant <- as.numeric(go$Significant)
+
+# Create -log10(p)
+go$minusLogP <- -log10(go$weightFisher)
+
+# Keep top 10 GO terms
+go_top10 <- go %>%
+  arrange(weightFisher) %>%
+  slice(1:10)
+
+# Order terms for plotting
+go_top10$Term <- factor(
+  go_top10$Term,
+  levels = rev(go_top10$Term)
+)
+
+# Bubble plot
+ggplot(
+  go_top10,
+  aes(
+    x = minusLogP,
+    y = Term
+  )
+) +
+  geom_point(
+    aes(
+      size = Significant,
+      color = minusLogP
+    )
+  ) +
+  scale_color_viridis_c() +
+  theme_bw(base_size = 14) +
+  labs(
+    title = "Top GO Terms F0: OWA vs AM",
+    x = expression(-logp),
+    y = "GO Term",
+    color = expression(-logp),
+    size = "Significant\nGenes"
+  )
 
