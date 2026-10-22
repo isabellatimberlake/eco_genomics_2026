@@ -1,0 +1,7 @@
+/var/spool/slurm/d/job5963705/slurm_script: line 33: --set-missing-var-ids: command not found
+/var/spool/slurm/d/job5963705/slurm_script: line 35: --indep-pairwise: command not found
+/var/spool/slurm/d/job5963705/slurm_script: line 37: --out: command not found
+Error: Basic file conversions do not support regular filtering operations.
+Rerun your command with --make-bed.
+/var/spool/slurm/d/job5963705/slurm_script: line 42: --extract: command not found
+/var/spool/slurm/d/job5963705/slurm_script: line 44: --make-bed: command not found

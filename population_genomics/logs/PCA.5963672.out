@@ -1,0 +1,19 @@
+
+PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)            cog-genomics.org/plink/1.9/
+(C) 2005-2024 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to plink.log.
+Options in effect:
+  --allow-extra-chr
+  --double-id
+  --vcf
+
+PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)            cog-genomics.org/plink/1.9/
+(C) 2005-2024 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to plink.log.
+Options in effect:
+  --allow-extra-chr
+  --double-id
+  --set-missing-var-ids @:#
+  --vcf
+
+My script is done!

@@ -1,0 +1,10 @@
+/var/spool/slurm/d/job5963672/slurm_script: line 26: VCF: command not found
+Error: Missing --vcf parameter.
+For more information, try "plink --help <flag name>" or "plink --help | more".
+/var/spool/slurm/d/job5963672/slurm_script: line 33: --set-missing-var-ids: command not found
+/var/spool/slurm/d/job5963672/slurm_script: line 35: --indep-pairwise: command not found
+/var/spool/slurm/d/job5963672/slurm_script: line 37: --out: command not found
+Error: Missing --vcf parameter.
+For more information, try "plink --help <flag name>" or "plink --help | more".
+/var/spool/slurm/d/job5963672/slurm_script: line 42: --extract: command not found
+/var/spool/slurm/d/job5963672/slurm_script: line 44: --make-bed: command not found
