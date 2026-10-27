@@ -362,9 +362,7 @@ Lottia_gigantea
 
 PATH TO CLASS folder:
 
-```{CLASS: /gpfs1/cl/biol3990/PopulationGenomics/}
- ME: /users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata
-```
+`{CLASS: /gpfs1/cl/biol3990/PopulationGenomics/}  ME: /users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata`
 
 -   Now, data is in /users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata/GeneticDiversity
 
@@ -379,3 +377,129 @@ PATH TO CLASS folder:
 -   Look at Nucleotide Diversity by population:
 
     -   ![](results/pi/pi_by_site.png)
+
+## 10. 27. 2026- Genetic Diversity using Tajima's D and Signatures of Selection
+
+-   Looking at pi/nucleotide diversity across populations and the chromosome
+
+-   Look at heterozygosity and Tajima's D... what they say about selection
+
+-   Signatures of Selection
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics`{style="padding: 0px 1px; border-width: 1px; border-style: solid; border-color: rgb(230, 230, 230) !important; border-image: initial; background-color: rgb(243, 243, 243) !important; font-family: \"DejaVu Sans Mono\", monospace !important; font-size: 10pt !important;"}
+
+**Input files**
+
+Lottia_gigantea_flt3_sub0.01.vcf.gz
+
+popmap.txt
+
+**Output files**
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**
+
+-   Looking at pi over latitude differences... scatterplot
+
+    -   ![](results/pi/pi_vs_latitude.png){width="332"}
+
+    -   possibly there is a pattern, but varies
+
+-   Plot pi by chromosome region to look at where genetic diversity is highest
+
+    -   further from the center, more recombination so typically less diversity, lower pis
+
+    -   ![](results/pi/pi_along_scaffold.png){width="447"}
+
+-   Tajima's D... calculated by VCF
+
+    -   read in files, filter out windows with less than 5 SNPs, add population data back in
+
+-   See lots of negative Tajima's D: signatures of positive selection
+
+    -   positive selection - beneficial new allele appears, shifts allele frequency over, sweeps up
+
+    -   negative selection/purifying -distribution of trait gets more narrow -\> positive Tajima's D
+
+    -   balancing selection -compresses the distribution, makes it wider...
+
+    -   disrupting selection -separating into two peaks, but not accounted for in Tajima's D
+
+-   Plotting Tajima's D by site
+
+    -   ![](results/TajD/tajimasD_by_site.png){width="459"}
+
+    -   Maybe more negative distribution in the most southern population
+
+-   Heterozygosity: inbreeding coefficient comparison of expected heterozygosity (HWE) to observed
+
+    -   positive- too few heterozygotes
+
+    -   negative- too many
+
+-   Observed heterozygosity
+
+    -   ![](results/het/Ho_by_site.png){width="510"}
+
+    -   shows the density of heterozygosity by individuals and by populations... see less in Intake Pipes site, as well as Government Point
+
+-   F = inbreeding coefficient
+
+    -   ![](results/het/F_by_site.png){width="493"}
+
+    -   how much divergence from hardy-weinberg
+
+        -   lower, excess heterozygotes, so maybe expanding population or selection, maybe relaxing selection pressures
+
+        -   higher, more inbreeding, bottleneck
+
+-   Selection Signatures
+
+-   BioOracle contains data to look at environmental variables such as sea surface temperature, salinity, etc. and to look also at forecasts of future data
+
+-   Calculating FST...
+
+    -   0 = just one population
+
+    -   1 = genetically completely different/distinct
+
+    -   measure of two populations' divergence
+
+    -   negative values = quirk of VCFtools so consider that 0
+
+-   Make a heatmap of Fst, comparing each population
+
+    -   ![](results/pairwise_fst_heatmap.png){width="538"}
+
+    -   
+
+-   Look at Fst by population
+
+    -   ![](results/fst_vs_distance.png){width="548"}
+
+-   Scanning Fst across the genome... can see in the Manhattan plot
+
+## 1. . 2026- Template
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics`{style="padding: 0px 1px; border-width: 1px; border-style: solid; border-color: rgb(230, 230, 230) !important; border-image: initial; background-color: rgb(243, 243, 243) !important; font-family: \"DejaVu Sans Mono\", monospace !important; font-size: 10pt !important;"}
+
+**Input files**
+
+**Output files**
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**
