@@ -486,6 +486,24 @@ popmap.txt
 
 -   Scanning Fst across the genome... can see in the Manhattan plot
 
+## 10. 29. 2026- Signatures of Selection
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics`{style="padding: 0px 1px; border-width: 1px; border-style: solid; border-color: rgb(230, 230, 230) !important; border-image: initial; background-color: rgb(243, 243, 243) !important; font-family: \"DejaVu Sans Mono\", monospace !important; font-size: 10pt !important;"}
+
+**Input files**
+
+**Output files**
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**
+
 ## 1. . 2026- Template
 
 **Working directory**
@@ -503,3 +521,78 @@ popmap.txt
 -   R-studio
 
 **Notes/Observations**
+
+-   Looking at windows of Fst, see where it is highest in the genome between two groups
+
+-   Not running BayPass, but understanding how it was run
+
+    -   corrects for demographic effects, looks at regions of the genome differentiated across all the genomes (not just pairwise)
+
+    -   Through genetic drift and random changes, Fst could pick up some "signatures" of selection.... BayPass' genetic matrices account for this
+
+    -   Genetic matrix, omega, contains pairwise distances (sites x sites) to represent the neutral part of the genome
+
+    -   After accounting for omega, get the value of XtX, which is the fixed, adjusted differentiation between the sites.
+
+-   BioOracle to add environmental factors
+
+-   Typically run BayPass 5 times and take the average of the 5.
+
+-   Working with data in R
+
+    -   read in environmental data, and baypass -\> genetic matrix
+
+    -   omega tree = making a tree of relatedness between the populations
+
+    -   ![](results/baypass_omega_tree.png){width="423"}
+
+    -   Also can see the relatedness on a heatmap:
+
+    -   ![](results/baypass_omega.png){width="441"}
+
+    -   See the major 3 kind of groups, populations occurring in the red squares, especially clear with how different the ASU and TOR are
+
+-   Looking for selection:
+
+    -   Finding Xtx... set population number to adjust the p-values by this number,
+
+    -   however, can't really look at p-vals with Baysean statistics, but we will for now... gets 2 types of p-values, separating from low outliers (balancing selection) and high outliers (positive selection)... Benjami-Hoechberg adjust
+
+-   see high number of low p-values
+
+    -   ![](results/baypass_xtx_pvalues.png){width="489"}
+
+-   BF statistic = Bayes factor; anything above 20 is significant, anything negative \~= 0
+
+    ```         
+    thetao_mean        102
+    ```
+
+    ```         
+    lat                365
+    ```
+
+-   
+
+    ![](results/baypass_bf_scan.png)
+
+-   Look at top SNPs for different environmental variables:
+
+    -   Latitude:
+
+        -   ![](results/baypass_top_lat_snp.png){width="491"}
+
+    -   Sea Surface Temp:
+
+        -   ![](results/baypass_top_sst_snp.png){width="534"}
+
+-   Selection scans! seeing patterns repeatedly occurring (the three populations, etc)
+
+-   To look at different SNPs
+
+    ```{r}
+    top_snp <- bf %>%
+      filter(covariate == "lat") %>%
+      slice_max(BF_dB, n = 1, with_ties = FALSE)
+    # add different n
+    ```
