@@ -504,7 +504,7 @@ popmap.txt
 
 **Notes/Observations**
 
-## 1. . 2026- Template
+## 10. 29. 2026- Template
 
 **Working directory**
 
@@ -572,9 +572,7 @@ popmap.txt
     lat                365
     ```
 
--   
-
-    ![](results/baypass_bf_scan.png)
+-   ![](results/baypass_bf_scan.png)
 
 -   Look at top SNPs for different environmental variables:
 
@@ -596,3 +594,83 @@ popmap.txt
       slice_max(BF_dB, n = 1, with_ties = FALSE)
     # add different n
     ```
+
+## 11. 3. 2026- Gene Ontology
+
+**Working directory**
+
+`/gpfs1/home/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics`{style="padding: 0px 1px; border-width: 1px; border-style: solid; border-color: rgb(230, 230, 230) !important; border-image: initial; background-color: rgb(243, 243, 243) !important; font-family: \"DejaVu Sans Mono\", monospace !important; font-size: 10pt !important;"}
+
+**Input files**
+
+Lottia_bp_xtx_outliers.txt
+
+envoutliers.txt
+
+lottia_snp2gene_genic.tsv
+
+lottia_gene2GO.map
+
+outlier_gene_effects.tsv
+
+**Output files**
+
+**Programs/Dependencies**
+
+-   R version 4.5.1
+
+-   R-studio
+
+**Notes/Observations**
+
+-   copied data from Genes folder in cl/biol3990
+
+-   Since we mapped our own genome, can have some artifacts and resemblances to model organisms
+
+-   Also, original length of GO before filtering
+
+    -   we have 21,314 genes but 13,710 GO terms (\~60%)
+
+    -   1822 outlier SNPs, 701 outlier SNPs inside genes, 272 candidate genes
+
+-   BLAST finds regions of similarity between sequences, typically from the protein comparisons... can help discover what a gene is
+
+    -   non-redundant is the largest database, contains *everything* on the site
+
+-   Looking into topGo object
+
+    -   112 significant genes
+
+    -   examine the results, with the GO terms weighted by size
+
+    -   dimensions of results: 50 genes, x 7
+
+    -   9 genes in the top GO term
+
+    -   filtering significant go terms, top 15
+
+    -   ![](results/topGO_BP_.png){width="414"}
+
+    -   \^\^ top genes by biological proccesses
+
+    -   top genes by molecular functions
+
+        ![](results/topGO_MF_.png){width="354"}
+
+    -   top genes by cellular components
+
+        ![](results/topGO_CC_.png){width="329"}
+
+-   SnpEff
+
+    -   mostly in intergenic region, but also many in missense and introns
+
+    -   ![](results/annocount.png){width="499"}
+
+    -   ![](results/annocountALL.png){width="456"}
+
+-   visually, it looks as if there are more intergenic region regulation and less downstream regulation in the environmentally significant genes than in the whole gene annotations, but would have to run statistical tests of significance to see (X\^2, Fisher's Exact Test)
+
+-   NCBI database is extremely important (oh I know)
+
+-   
