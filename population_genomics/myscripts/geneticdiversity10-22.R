@@ -81,7 +81,7 @@ scan_plot <- pi %>%
 # look at these by site
 scan_plot_by_pop <- scan_plot + facet_wrap(~Site)
 
-ggsave(paste0(OUTDIR, "/pi/pi_along_scaffold.png"), plot = scan_plot, width = 12, height = 6)
+# ggsave(paste0(OUTDIR, "/pi/pi_along_scaffold.png"), plot = scan_plot, width = 12, height = 6)
 
 
 dir.create(paste0(OUTDIR,"/TajD"))
@@ -99,7 +99,7 @@ tajd <- taj_files %>%
   mutate(Site = fct_reorder(Population, Latitude))
 
 tajd %>%
-  group_by(Site) %>%
+  group_by(Site) %>% 
   summarise(n_windows = n(),
             mean_D    = mean(TajimaD, na.rm = TRUE),
             median_D  = median(TajimaD, na.rm = TRUE))

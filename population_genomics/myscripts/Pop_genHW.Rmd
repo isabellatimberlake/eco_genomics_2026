@@ -1,0 +1,57 @@
+---
+title: "Pop_genHW"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+
+setwd("/users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata/GeneticDiversity")
+OUTDIR="/users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/results/PopGenHW"
+
+```
+
+```{r}
+# read in files
+meta <- read_csv("sample_metadata.csv")
+
+sites <- meta %>%
+  group_by(Population) %>%
+  summarise(Latitude = mean(Latitude))
+
+pi_files <- list.files(path = "HWpi", pattern = "windowed.pi$", full.names = TRUE)
+pi <- pi_files %>%
+  # name each file by its site, e.g. "pi/BOD.windowed.pi" -> "BOD"
+  set_names(str_remove(basename(pi_files), fixed(".windowed.pi"))) %>%
+  # read every file and stack them, putting the names in a new column, Site
+  map_dfr(read_tsv, .id = "Population", show_col_types = FALSE) %>%
+  left_join(sites, by = "Population") %>%
+  mutate(Site = fct_reorder(Population, Latitude))
+pi_summary <- pi %>%
+  group_by(Population, Latitude) %>%
+  summarise(n_windows = n(),
+            mean_pi   = mean(PI),
+            median_pi = median(PI),
+            .groups = "drop")
+pi_summary
+
+pi_plot <- ggplot(pi, aes(Site, PI, fill = Site)) +
+  geom_violin(scale = "width", linewidth = 0.5, colour = NA) +
+  geom_boxplot(width = 0.15, outlier.shape = NA, linewidth = 0.3) +
+  scale_fill_viridis_d(end = 0.9) +
+  scale_y_log10() +
+  labs(x = "Population", y = "log10(Nucleotide diversity)") +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  coord_flip()
+pi_plot
+
+chosenSites <- pi |> filter(Population %in% c("ASU", "ROS"))
+
+#top_scaffold <- chosenSites %>%
+ # count(CHROM, sort = TRUE) %>%
+  #slice(1) %>%
+  #pull(CHROM)
+
+```
+

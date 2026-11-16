@@ -26,48 +26,48 @@ none
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
--   Reading and preparing VCFs
+- Reading and preparing VCFs
 
-    -   ./. represents missing data... 1\|11\|0 shows no gaps in the data, the whole genome is known
+  - ./. represents missing data... 1\|11\|0 shows no gaps in the data, the whole genome is known
 
-    -   VCF = variant call format: stores where SNPs are in the genome
+  - VCF = variant call format: stores where SNPs are in the genome
 
-    -   fastp = automated fastqc to trim ends and quality scores
+  - fastp = automated fastqc to trim ends and quality scores
 
-    -   Calling variants -\> determining where SNPs are across the genome
+  - Calling variants -\> determining where SNPs are across the genome
 
-    -   More filtering on missingness, phred score, allele rarity
+  - More filtering on missingness, phred score, allele rarity
 
-    -   alignment = exact position, mapping = approximate position
+  - alignment = exact position, mapping = approximate position
 
--   Moving files over
+- Moving files over
 
--   Contig is a DNA fragment
+- Contig is a DNA fragment
 
--   Loading modules
+- Loading modules
 
-    -   bcftools --version \>\> bcftools 1.19 and htslib 1.19
+  - bcftools --version \>\> bcftools 1.19 and htslib 1.19
 
--   The header contains all the information about filtering, summarizing, etc
+- The header contains all the information about filtering, summarizing, etc
 
--   grep grabs a specific thing, or grep -v excludes a certain thing... search function
+- grep grabs a specific thing, or grep -v excludes a certain thing... search function
 
-    ```         
-    bcftools view -h Lottia_gigantea_biallelic.vcf.gz | grep "^##FORMAT"
-    bcftools head Lottia_gigantea_biallelic.vcf.gz | grep -v "##contig="
-    ```
+  ```         
+  bcftools view -h Lottia_gigantea_biallelic.vcf.gz | grep "^##FORMAT"
+  bcftools head Lottia_gigantea_biallelic.vcf.gz | grep -v "##contig="
+  ```
 
--   553 Samples
+- 553 Samples
 
--   GT:PL:DP:AD:GQ ... shows each bit of information per sample: genotype, genotype likelihood, depth, allele depth, genotype quality: 0/0:0,9,107:3:3,0:127
+- GT:PL:DP:AD:GQ ... shows each bit of information per sample: genotype, genotype likelihood, depth, allele depth, genotype quality: 0/0:0,9,107:3:3,0:127
 
--   KB201661.1 333 . A G 234.246 PASS ... head line per sample, shows the base, alleles, quality score, pass of test \## 10. 13. 2026- Looking into VCF files
+- KB201661.1 333 . A G 234.246 PASS ... head line per sample, shows the base, alleles, quality score, pass of test \## 10. 13. 2026- Looking into VCF files
 
 **Working directory**
 
@@ -83,48 +83,48 @@ none
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
--   Reading and preparing VCFs
+- Reading and preparing VCFs
 
-    -   ./. represents missing data... 1\|11\|0 shows no gaps in the data, the whole genome is known
+  - ./. represents missing data... 1\|11\|0 shows no gaps in the data, the whole genome is known
 
-    -   VCF = variant call format: stores where SNPs are in the genome
+  - VCF = variant call format: stores where SNPs are in the genome
 
-    -   fastp = automated fastqc to trim ends and quality scores
+  - fastp = automated fastqc to trim ends and quality scores
 
-    -   Calling variants -\> determining where SNPs are across the genome
+  - Calling variants -\> determining where SNPs are across the genome
 
-    -   More filtering on missingness, phred score, allele rarity
+  - More filtering on missingness, phred score, allele rarity
 
-    -   alignment = exact position, mapping = approximate position
+  - alignment = exact position, mapping = approximate position
 
--   Moving files over
+- Moving files over
 
--   Contig is a DNA fragment
+- Contig is a DNA fragment
 
--   Loading modules
+- Loading modules
 
-    -   bcftools --version \>\> bcftools 1.19 and htslib 1.19
+  - bcftools --version \>\> bcftools 1.19 and htslib 1.19
 
--   The header contains all the information about filtering, summarizing, etc
+- The header contains all the information about filtering, summarizing, etc
 
--   grep grabs a specific thing, or grep -v excludes a certain thing... search function
+- grep grabs a specific thing, or grep -v excludes a certain thing... search function
 
-    ```         
-    bcftools view -h Lottia_gigantea_biallelic.vcf.gz | grep "^##FORMAT"
-    bcftools head Lottia_gigantea_biallelic.vcf.gz | grep -v "##contig="
-    ```
+  ```         
+  bcftools view -h Lottia_gigantea_biallelic.vcf.gz | grep "^##FORMAT"
+  bcftools head Lottia_gigantea_biallelic.vcf.gz | grep -v "##contig="
+  ```
 
--   553 Samples
+- 553 Samples
 
--   GT:PL:DP:AD:GQ ... shows each bit of information per sample: genotype, genotype likelihood, depth, allele depth, genotype quality: 0/0:0,9,107:3:3,0:127
+- GT:PL:DP:AD:GQ ... shows each bit of information per sample: genotype, genotype likelihood, depth, allele depth, genotype quality: 0/0:0,9,107:3:3,0:127
 
--   KB201661.1 333 . A G 234.246 PASS ... head line per sample, shows the base, alleles, quality score, pass of test
+- KB201661.1 333 . A G 234.246 PASS ... head line per sample, shows the base, alleles, quality score, pass of test
 
 ## 10. 15. 2026- Fixed VCF file
 
@@ -140,29 +140,29 @@ none
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
--   Had to fix VCF files
+- Had to fix VCF files
 
--   looking at submitting a batch job
+- looking at submitting a batch job
 
-    -   Use the \## identifiers to tell the computer about your job...
+  - Use the \## identifiers to tell the computer about your job...
 
-    -   Most can stay the same as default, but change memory
+  - Most can stay the same as default, but change memory
 
 ## 10. 20. 2026- Population Structure
 
--   Filtering based on linkage disequilibrium
+- Filtering based on linkage disequilibrium
 
--   PCA
+- PCA
 
--   Admixture
+- Admixture
 
--   Visualization
+- Visualization
 
 **Working directory**
 
@@ -180,109 +180,109 @@ Lottia_gigantea
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
--   PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)
+- PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)
 
 **Notes/Observations**
 
--   Create variable for my data directory:
+- Create variable for my data directory:
 
-    ``` {DATA_DIR="/users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata"}
-    ```
+  ``` {DATA_DIR="/users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata"}
+  ```
 
-    ```{bash}
-    plink --vcf $VCF --double-id --allow-extra-chr \
-        --set-missing-var-ids @:# \
-        --indep-pairwise 50 10 0.2 \
-        --out Lg_LD_0.2
-    ```
+  ```{bash}
+  plink --vcf $VCF --double-id --allow-extra-chr \
+      --set-missing-var-ids @:# \
+      --indep-pairwise 50 10 0.2 \
+      --out Lg_LD_0.2
+  ```
 
--   Need to allow extra chromosomes and set our own SNP names because this program is built for human data; then prune it for LD \> indep-pairwise, window of 50 SNPS, move by 10 (step size), then filter by r \> .2; then name output file Lg_LD_0.2
+- Need to allow extra chromosomes and set our own SNP names because this program is built for human data; then prune it for LD \> indep-pairwise, window of 50 SNPS, move by 10 (step size), then filter by r \> .2; then name output file Lg_LD_0.2
 
-    -   this stepwise method, or windows of genomes, also used for other functions, such as calculating nucleotide
+  - this stepwise method, or windows of genomes, also used for other functions, such as calculating nucleotide
 
--   RStudio PCA visuals
+- RStudio PCA visuals
 
-    -   read in eigen vectors values
+  - read in eigen vectors values
 
-    -   rename the columns: the first is the sample ID, the rest are PC1, PC2, ...
+  - rename the columns: the first is the sample ID, the rest are PC1, PC2, ...
 
--   column 1 is population ID, then the eigen vector for each PCA (22 PCAs in total)
+- column 1 is population ID, then the eigen vector for each PCA (22 PCAs in total)
 
--   Change eigen values to percentages of variance explored
+- Change eigen values to percentages of variance explored
 
-    -   look at this scree plot
+  - look at this scree plot
 
-    -   ![](results/PCAVariationExplained10-20.png){width="427"}
+  - ![](results/PCAVariationExplained10-20.png){width="427"}
 
-    -   shows that mostly PCA 1-3/4 matter/contribute to the variance
+  - shows that mostly PCA 1-3/4 matter/contribute to the variance
 
--   Make PCA plot:
+- Make PCA plot:
 
-    -   ![](results/Lg_0.2_pca.png){width="446"}
+  - ![](results/Lg_0.2_pca.png){width="446"}
 
-    -   see that PC2 has a larger impact from latitude, on population structure
+  - see that PC2 has a larger impact from latitude, on population structure
 
-    -   Also see greater population separation in the Southern populations, more range expansion and more mixture in Northernmost
+  - Also see greater population separation in the Southern populations, more range expansion and more mixture in Northernmost
 
--   Looking at the PCAs by latitude
+- Looking at the PCAs by latitude
 
-    -   ![](results/Lg_0.2_pca_latitude.png){width="570"}
+  - ![](results/Lg_0.2_pca_latitude.png){width="570"}
 
--   also cool map by PCA
+- also cool map by PCA
 
-    -   use maps package !
+  - use maps package !
 
-        -   ![](results/Lg_0.2_pca_map.png){width="500"}
+    - ![](results/Lg_0.2_pca_map.png){width="500"}
 
--   Admixture ... start with choosing K
+- Admixture ... start with choosing K
 
-    -   Do as a batch job
+  - Do as a batch job
 
-    -   use admixture package, but takes a long time to load
+  - use admixture package, but takes a long time to load
 
-    -   input is the Lg_LD_0.2.bed file
+  - input is the Lg_LD_0.2.bed file
 
-    -   try with K=1-5
+  - try with K=1-5
 
-    -   get error rate for each k, k the number of clusters/populations
+  - get error rate for each k, k the number of clusters/populations
 
-    -   can take a few hours to loop through values
+  - can take a few hours to loop through values
 
-        -   to add the errors on, use "\>\>" to append rather than overwrite
+    - to add the errors on, use "\>\>" to append rather than overwrite
 
--   Batch jobs
+- Batch jobs
 
-    -   need to use a full path and not the \~
+  - need to use a full path and not the \~
 
--   Starting in R with already done data
+- Starting in R with already done data
 
--   Looking at the cross validation errors for each number of K
+- Looking at the cross validation errors for each number of K
 
-    -   ![](results/cv_error.png){width="536"}
+  - ![](results/cv_error.png){width="536"}
 
-    -   Appears that the best K is 3
+  - Appears that the best K is 3
 
--   Plotting ancestry proportions by sample/site
+- Plotting ancestry proportions by sample/site
 
-    -   made read_q function to reshape .Q files for different Ks,
+  - made read_q function to reshape .Q files for different Ks,
 
-    -   bind results together
+  - bind results together
 
-    -   plot by ancestry proportion, K, and site using column plot
+  - plot by ancestry proportion, K, and site using column plot
 
--   Cluster numbers aren’t consistent between runs. “Cluster 1” at K = 3 isn’t necessarily the same ancestral population as “Cluster 1” at K = 4, so the colours can swap between rows.
+- Cluster numbers aren’t consistent between runs. “Cluster 1” at K = 3 isn’t necessarily the same ancestral population as “Cluster 1” at K = 4, so the colours can swap between rows.
 
--   Understanding admixture plot
+- Understanding admixture plot
 
-    -   ![](results/admixture_K1-5.png){width="585"}
+  - ![](results/admixture_K1-5.png){width="585"}
 
-    -   see clear differentiation in last/most southern 2 sites, different across
+  - see clear differentiation in last/most southern 2 sites, different across
 
-    -   best looking at K=2 or K= 3 but still see lots of mixture in populations
+  - best looking at K=2 or K= 3 but still see lots of mixture in populations
 
 ## 10. 22. 2026- Looking at genetic diversity
 
@@ -296,95 +296,95 @@ Lottia_gigantea
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
--   vcftools/0.1.16
+- vcftools/0.1.16
 
 **Notes/Observations**
 
--   Can look at genetic diversity....
+- Can look at genetic diversity....
 
-    -   within an individual (look at particular chromosomes with increased diversity)
+  - within an individual (look at particular chromosomes with increased diversity)
 
-    -   within a population
+  - within a population
 
-    -   within a species
+  - within a species
 
--   metrics of genetic diversity
+- metrics of genetic diversity
 
-    -   heterozygosity
+  - heterozygosity
 
-    -   private alleles –\> allele richness
+  - private alleles –\> allele richness
 
-    -   Fst (fixation index - subtotal/total) (intragroup vs. total group)
+  - Fst (fixation index - subtotal/total) (intragroup vs. total group)
 
-        -   compares variation between subgroups vs variation in whole group
+    - compares variation between subgroups vs variation in whole group
 
-    -   effective population size
+  - effective population size
 
-        -   Ne: genetic population size... what individuals are contributing to the next gen
+    - Ne: genetic population size... what individuals are contributing to the next gen
 
-        -   Nc: consensus population size
+    - Nc: consensus population size
 
-    -   Nucleotide diversity (pi)
+  - Nucleotide diversity (pi)
 
-    -   Inbreeding coefficient -\> Fis
+  - Inbreeding coefficient -\> Fis
 
-    -   Percent Polymorphism
+  - Percent Polymorphism
 
--   p + q = 1 :: Allele frequency; HWE -\> p^2^ + 2pq + q^2^ = 1; 2pq = heterozygotes
+- p + q = 1 :: Allele frequency; HWE -\> p^2^ + 2pq + q^2^ = 1; 2pq = heterozygotes
 
-    -   H0 = #heterozygotes/ #sampled
+  - H0 = #heterozygotes/ #sampled
 
-    -   Fis = 1 - H0/He (observed/expected)
+  - Fis = 1 - H0/He (observed/expected)
 
-    -   F = 1 - (.2/.5) = .06 .... less observed than expected -\> decreasing heterozygotes
+  - F = 1 - (.2/.5) = .06 .... less observed than expected -\> decreasing heterozygotes
 
-    -   F = 1 - (.5/.4) = -.25... more than expected -\> excess heterozygotes
+  - F = 1 - (.5/.4) = -.25... more than expected -\> excess heterozygotes
 
-    -   F = 0 ... expected number from population
+  - F = 0 ... expected number from population
 
--   Tajima's D = pi - theta/(var\*sqrt(pi-theta)) where theta = Waterson's theta and pi = pairwise nucleotide diversity
+- Tajima's D = pi - theta/(var\*sqrt(pi-theta)) where theta = Waterson's theta and pi = pairwise nucleotide diversity
 
-    -   theta = S/an = segregating sites over sample size coeffic
+  - theta = S/an = segregating sites over sample size coeffic
 
-    -   If TD = 0, no signatures of selection, unusual demography, or stray from normal
+  - If TD = 0, no signatures of selection, unusual demography, or stray from normal
 
-    -   If TD \> 0, there is an excess of common mutations... balancing selection,
+  - If TD \> 0, there is an excess of common mutations... balancing selection,
 
-    -   If TD \< 0, there is an excess of rare mutations... selective sweep, rapid population expansion, when pi is less than theta
+  - If TD \< 0, there is an excess of rare mutations... selective sweep, rapid population expansion, when pi is less than theta
 
-    -   compares 2 ways of calculating genetic diversity... pairwise by pi (more sensitive to rare alleles)
+  - compares 2 ways of calculating genetic diversity... pairwise by pi (more sensitive to rare alleles)
 
--   Tajima's D needs all data... can not filter out Minor alleles
+- Tajima's D needs all data... can not filter out Minor alleles
 
 PATH TO CLASS folder:
 
 `{CLASS: /gpfs1/cl/biol3990/PopulationGenomics/}  ME: /users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata`
 
--   Now, data is in /users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata/GeneticDiversity
+- Now, data is in /users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata/GeneticDiversity
 
--   Calculate pi over samples
+- Calculate pi over samples
 
-    -   create table with headers:
+  - create table with headers:
 
-        ```         
-        Population Latitude n_windows  mean_pi median_pi
-        ```
+    ```         
+    Population Latitude n_windows  mean_pi median_pi
+    ```
 
--   Look at Nucleotide Diversity by population:
+- Look at Nucleotide Diversity by population:
 
-    -   ![](results/pi/pi_by_site.png)
+  - ![](results/pi/pi_by_site.png)
 
 ## 10. 27. 2026- Genetic Diversity using Tajima's D and Signatures of Selection
 
--   Looking at pi/nucleotide diversity across populations and the chromosome
+- Looking at pi/nucleotide diversity across populations and the chromosome
 
--   Look at heterozygosity and Tajima's D... what they say about selection
+- Look at heterozygosity and Tajima's D... what they say about selection
 
--   Signatures of Selection
+- Signatures of Selection
 
 **Working directory**
 
@@ -400,91 +400,91 @@ popmap.txt
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
--   Looking at pi over latitude differences... scatterplot
+- Looking at pi over latitude differences... scatterplot
 
-    -   ![](results/pi/pi_vs_latitude.png){width="332"}
+  - ![](results/pi/pi_vs_latitude.png){width="332"}
 
-    -   possibly there is a pattern, but varies
+  - possibly there is a pattern, but varies
 
--   Plot pi by chromosome region to look at where genetic diversity is highest
+- Plot pi by chromosome region to look at where genetic diversity is highest
 
-    -   further from the center, more recombination so typically less diversity, lower pis
+  - further from the center, more recombination so typically less diversity, lower pis
 
-    -   ![](results/pi/pi_along_scaffold.png){width="447"}
+  - ![](results/pi/pi_along_scaffold.png){width="447"}
 
--   Tajima's D... calculated by VCF
+- Tajima's D... calculated by VCF
 
-    -   read in files, filter out windows with less than 5 SNPs, add population data back in
+  - read in files, filter out windows with less than 5 SNPs, add population data back in
 
--   See lots of negative Tajima's D: signatures of positive selection
+- See lots of negative Tajima's D: signatures of positive selection
 
-    -   positive selection - beneficial new allele appears, shifts allele frequency over, sweeps up
+  - positive selection - beneficial new allele appears, shifts allele frequency over, sweeps up
 
-    -   negative selection/purifying -distribution of trait gets more narrow -\> positive Tajima's D
+  - negative selection/purifying -distribution of trait gets more narrow -\> positive Tajima's D
 
-    -   balancing selection -compresses the distribution, makes it wider...
+  - balancing selection -compresses the distribution, makes it wider...
 
-    -   disrupting selection -separating into two peaks, but not accounted for in Tajima's D
+  - disrupting selection -separating into two peaks, but not accounted for in Tajima's D
 
--   Plotting Tajima's D by site
+- Plotting Tajima's D by site
 
-    -   ![](results/TajD/tajimasD_by_site.png){width="459"}
+  - ![](results/TajD/tajimasD_by_site.png){width="459"}
 
-    -   Maybe more negative distribution in the most southern population
+  - Maybe more negative distribution in the most southern population
 
--   Heterozygosity: inbreeding coefficient comparison of expected heterozygosity (HWE) to observed
+- Heterozygosity: inbreeding coefficient comparison of expected heterozygosity (HWE) to observed
 
-    -   positive- too few heterozygotes
+  - positive- too few heterozygotes
 
-    -   negative- too many
+  - negative- too many
 
--   Observed heterozygosity
+- Observed heterozygosity
 
-    -   ![](results/het/Ho_by_site.png){width="510"}
+  - ![](results/het/Ho_by_site.png){width="510"}
 
-    -   shows the density of heterozygosity by individuals and by populations... see less in Intake Pipes site, as well as Government Point
+  - shows the density of heterozygosity by individuals and by populations... see less in Intake Pipes site, as well as Government Point
 
--   F = inbreeding coefficient
+- F = inbreeding coefficient
 
-    -   ![](results/het/F_by_site.png){width="493"}
+  - ![](results/het/F_by_site.png){width="493"}
 
-    -   how much divergence from hardy-weinberg
+  - how much divergence from hardy-weinberg
 
-        -   lower, excess heterozygotes, so maybe expanding population or selection, maybe relaxing selection pressures
+    - lower, excess heterozygotes, so maybe expanding population or selection, maybe relaxing selection pressures
 
-        -   higher, more inbreeding, bottleneck
+    - higher, more inbreeding, bottleneck
 
--   Selection Signatures
+- Selection Signatures
 
--   BioOracle contains data to look at environmental variables such as sea surface temperature, salinity, etc. and to look also at forecasts of future data
+- BioOracle contains data to look at environmental variables such as sea surface temperature, salinity, etc. and to look also at forecasts of future data
 
--   Calculating FST...
+- Calculating FST...
 
-    -   0 = just one population
+  - 0 = just one population
 
-    -   1 = genetically completely different/distinct
+  - 1 = genetically completely different/distinct
 
-    -   measure of two populations' divergence
+  - measure of two populations' divergence
 
-    -   negative values = quirk of VCFtools so consider that 0
+  - negative values = quirk of VCFtools so consider that 0
 
--   Make a heatmap of Fst, comparing each population
+- Make a heatmap of Fst, comparing each population
 
-    -   ![](results/pairwise_fst_heatmap.png){width="538"}
+  - ![](results/pairwise_fst_heatmap.png){width="538"}
 
-    -   
+  - 
 
--   Look at Fst by population
+- Look at Fst by population
 
-    -   ![](results/fst_vs_distance.png){width="548"}
+  - ![](results/fst_vs_distance.png){width="548"}
 
--   Scanning Fst across the genome... can see in the Manhattan plot
+- Scanning Fst across the genome... can see in the Manhattan plot
 
 ## 10. 29. 2026- Signatures of Selection
 
@@ -498,9 +498,9 @@ popmap.txt
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
@@ -516,84 +516,84 @@ popmap.txt
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
--   Looking at windows of Fst, see where it is highest in the genome between two groups
+- Looking at windows of Fst, see where it is highest in the genome between two groups
 
--   Not running BayPass, but understanding how it was run
+- Not running BayPass, but understanding how it was run
 
-    -   corrects for demographic effects, looks at regions of the genome differentiated across all the genomes (not just pairwise)
+  - corrects for demographic effects, looks at regions of the genome differentiated across all the genomes (not just pairwise)
 
-    -   Through genetic drift and random changes, Fst could pick up some "signatures" of selection.... BayPass' genetic matrices account for this
+  - Through genetic drift and random changes, Fst could pick up some "signatures" of selection.... BayPass' genetic matrices account for this
 
-    -   Genetic matrix, omega, contains pairwise distances (sites x sites) to represent the neutral part of the genome
+  - Genetic matrix, omega, contains pairwise distances (sites x sites) to represent the neutral part of the genome
 
-    -   After accounting for omega, get the value of XtX, which is the fixed, adjusted differentiation between the sites.
+  - After accounting for omega, get the value of XtX, which is the fixed, adjusted differentiation between the sites.
 
--   BioOracle to add environmental factors
+- BioOracle to add environmental factors
 
--   Typically run BayPass 5 times and take the average of the 5.
+- Typically run BayPass 5 times and take the average of the 5.
 
--   Working with data in R
+- Working with data in R
 
-    -   read in environmental data, and baypass -\> genetic matrix
+  - read in environmental data, and baypass -\> genetic matrix
 
-    -   omega tree = making a tree of relatedness between the populations
+  - omega tree = making a tree of relatedness between the populations
 
-    -   ![](results/baypass_omega_tree.png){width="423"}
+  - ![](results/baypass_omega_tree.png){width="423"}
 
-    -   Also can see the relatedness on a heatmap:
+  - Also can see the relatedness on a heatmap:
 
-    -   ![](results/baypass_omega.png){width="441"}
+  - ![](results/baypass_omega.png){width="441"}
 
-    -   See the major 3 kind of groups, populations occurring in the red squares, especially clear with how different the ASU and TOR are
+  - See the major 3 kind of groups, populations occurring in the red squares, especially clear with how different the ASU and TOR are
 
--   Looking for selection:
+- Looking for selection:
 
-    -   Finding Xtx... set population number to adjust the p-values by this number,
+  - Finding Xtx... set population number to adjust the p-values by this number,
 
-    -   however, can't really look at p-vals with Baysean statistics, but we will for now... gets 2 types of p-values, separating from low outliers (balancing selection) and high outliers (positive selection)... Benjami-Hoechberg adjust
+  - however, can't really look at p-vals with Baysean statistics, but we will for now... gets 2 types of p-values, separating from low outliers (balancing selection) and high outliers (positive selection)... Benjami-Hoechberg adjust
 
--   see high number of low p-values
+- see high number of low p-values
 
-    -   ![](results/baypass_xtx_pvalues.png){width="489"}
+  - ![](results/baypass_xtx_pvalues.png){width="489"}
 
--   BF statistic = Bayes factor; anything above 20 is significant, anything negative \~= 0
+- BF statistic = Bayes factor; anything above 20 is significant, anything negative \~= 0
 
-    ```         
-    thetao_mean        102
-    ```
+  ```         
+  thetao_mean        102
+  ```
 
-    ```         
-    lat                365
-    ```
+  ```         
+  lat                365
+  ```
 
--   ![](results/baypass_bf_scan.png)
+- ![](results/baypass_bf_scan.png)
 
--   Look at top SNPs for different environmental variables:
+- Look at top SNPs for different environmental variables:
 
-    -   Latitude:
+  - Latitude:
 
-        -   ![](results/baypass_top_lat_snp.png){width="491"}
+    - ![](results/baypass_top_lat_snp.png){width="491"}
 
-    -   Sea Surface Temp:
+  - Sea Surface Temp:
 
-        -   ![](results/baypass_top_sst_snp.png){width="534"}
+    - ![](results/baypass_top_sst_snp.png){width="534"}
 
--   Selection scans! seeing patterns repeatedly occurring (the three populations, etc)
+- Selection scans! seeing patterns repeatedly occurring (the three populations, etc)
 
--   To look at different SNPs
+- To look at different SNPs
 
-    ```{r}
-    top_snp <- bf %>%
-      filter(covariate == "lat") %>%
-      slice_max(BF_dB, n = 1, with_ties = FALSE)
-    # add different n
-    ```
+  ```{r}
+  top_snp <- bf %>%
+    filter(covariate == "lat") %>%
+    slice_max(BF_dB, n = 1, with_ties = FALSE)
+  # add different n
+  ```
 
 ## 11. 3. 2026- Gene Ontology
 
@@ -617,60 +617,58 @@ outlier_gene_effects.tsv
 
 **Programs/Dependencies**
 
--   R version 4.5.1
+- R version 4.5.1
 
--   R-studio
+- R-studio
 
 **Notes/Observations**
 
--   copied data from Genes folder in cl/biol3990
+- copied data from Genes folder in cl/biol3990
 
--   Since we mapped our own genome, can have some artifacts and resemblances to model organisms
+- Since we mapped our own genome, can have some artifacts and resemblances to model organisms
 
--   Also, original length of GO before filtering
+- Also, original length of GO before filtering
 
-    -   we have 21,314 genes but 13,710 GO terms (\~60%)
+  - we have 21,314 genes but 13,710 GO terms (\~60%)
 
-    -   1822 outlier SNPs, 701 outlier SNPs inside genes, 272 candidate genes
+  - 1822 outlier SNPs, 701 outlier SNPs inside genes, 272 candidate genes
 
--   BLAST finds regions of similarity between sequences, typically from the protein comparisons... can help discover what a gene is
+- BLAST finds regions of similarity between sequences, typically from the protein comparisons... can help discover what a gene is
 
-    -   non-redundant is the largest database, contains *everything* on the site
+  - non-redundant is the largest database, contains *everything* on the site
 
--   Looking into topGo object
+- Looking into topGo object
 
-    -   112 significant genes
+  - 112 significant genes
 
-    -   examine the results, with the GO terms weighted by size
+  - examine the results, with the GO terms weighted by size
 
-    -   dimensions of results: 50 genes, x 7
+  - dimensions of results: 50 genes, x 7
 
-    -   9 genes in the top GO term
+  - 9 genes in the top GO term
 
-    -   filtering significant go terms, top 15
+  - filtering significant go terms, top 15
 
-    -   ![](results/topGO_BP_.png){width="414"}
+  - ![](results/topGO_BP_.png){width="414"}
 
-    -   \^\^ top genes by biological proccesses
+  - \^\^ top genes by biological proccesses
 
-    -   top genes by molecular functions
+  - top genes by molecular functions
 
-        ![](results/topGO_MF_.png){width="354"}
+    ![](results/topGO_MF_.png){width="354"}
 
-    -   top genes by cellular components
+  - top genes by cellular components
 
-        ![](results/topGO_CC_.png){width="329"}
+    ![](results/topGO_CC_.png){width="329"}
 
--   SnpEff
+- SnpEff
 
-    -   mostly in intergenic region, but also many in missense and introns
+  - mostly in intergenic region, but also many in missense and introns
 
-    -   ![](results/annocount.png){width="499"}
+  - ![](results/annocount.png){width="499"}
 
-    -   ![](results/annocountALL.png){width="456"}
+  - ![](results/annocountALL.png){width="456"}
 
--   visually, it looks as if there are more intergenic region regulation and less downstream regulation in the environmentally significant genes than in the whole gene annotations, but would have to run statistical tests of significance to see (X\^2, Fisher's Exact Test)
+- visually, it looks as if there are more intergenic region regulation and less downstream regulation in the environmentally significant genes than in the whole gene annotations, but would have to run statistical tests of significance to see (X\^2, Fisher's Exact Test)
 
--   NCBI database is extremely important (oh I know)
-
--   
+- NCBI database is extremely important (oh I know)

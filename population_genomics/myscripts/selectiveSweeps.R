@@ -47,7 +47,7 @@ ggsave(paste0(OUTDIR,"/fst_vs_distance.png"), width = 5, height = 4)
 pop1 <- "ASU"   #the same two populations as in the bash code
 pop2 <- "KRU"
 
-# fst_win <- read_tsv(paste0("fst/", pop1, "_vs_", pop2, "_10k.windowed.weir.fst"))
+fst_win <- read_tsv(paste0("fst/", pop1, "_vs_", pop2, "_10k.windowed.weir.fst"))
 
 fst_win <- read_tsv(("fst/ASU_vs_KRU_FST_10kb.windowed.weir.fst"))
 # Helper: turn (scaffold, position) into a position along the whole genome by laying the scaffolds end to end, in the order in which they appear in the data.
@@ -62,6 +62,14 @@ add_genome_pos <- function(df) {
     left_join(scaffolds, by = "CHROM") %>% ##join this data by given data with CHROM
     mutate(genome_pos = offset + POS) ###cumalative genome pos 
 }
+
+# looking at genome wide Fst
+meta <- meta %>%
+  distinct(Population, Latitude, Longitude)
+pop_order <- meta$Population[order(meta$Latitude)]
+
+
+
 
 fst_win <- fst_win %>%
   mutate(POS = (BIN_START + BIN_END) / 2) %>% 
