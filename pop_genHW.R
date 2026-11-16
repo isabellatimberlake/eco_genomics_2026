@@ -110,7 +110,14 @@ ggsave(paste0(OUTDIR,"/fst_genome scan_", pop1, "_vs_", pop2, ".png"), width = 1
 
 # looking at XtX
 
-snps <- read_tsv("Lottia_bp_xtx_outliers.txt")
+snps <- read_tsv("Lottia.baypass.snps.txt", header = TRUE, check.names = FALSE)%>%
+  left_join(snps, by = "MRK") %>%
+  mutate(lp_high = pchisq(XtXst, npop, lower.tail = FALSE, log.p = TRUE), #
+         lp_low = pchisq(XtXst, npop, lower.tail = TRUE, log.p = TRUE),
+         direction = if_else(lp_high < lp_low, "high", "low"),
+         log10_p = -(pmin(lp_high, lp_low) + log(2)) / log(10),
+         pval = 10^(-log10_p),
+         qval = p.adjust(pval, method = "BH"))
 
 snps$MRK<-rownames(snps)
 snps$MRK<-as.numeric(snps$MRK)
@@ -118,25 +125,30 @@ snps$MRK<-as.numeric(snps$MRK)
 npop <- 19
 
 xtx <- read.table("Lottia_bp_2_summary_pi_xtx.out", header = TRUE, check.names = FALSE) %>%
-  left_join(snps, by = "MRK") 
+  left_join(snps, by = "MRK") %>%
+  mutate(lp_high = pchisq(XtXst, npop, lower.tail = FALSE, log.p = TRUE), #
+         lp_low = pchisq(XtXst, npop, lower.tail = TRUE, log.p = TRUE),
+         direction = if_else(lp_high < lp_low, "high", "low"),
+         log10_p = -(pmin(lp_high, lp_low) + log(2)) / log(10),
+         pval = 10^(-log10_p),
+         qval = p.adjust(pval, method = "BH"))
+
+#xtx <- read.table("Lottia_bp_2_summary_pi_xtx.out", header = TRUE, check.names = FALSE) %>%
+  #left_join(snps, by = "MRK") 
 xtx <- xtx %>%
   add_genome_pos()     ##recall above if reloaded R
 
-sum(xtx$outlier, na.rm = TRUE)                           
+sum(xtx$outlier)
 
-# used Claude to debug here because I had errors with missing values
-threshold <- quantile(xtx$qval, 0.001, na.rm = TRUE)   # top 0.1% (smallest q)
-
+threshold <- quantile(xtx$qval, 0.001) # top 0.1% (smallest q)
 ggplot(xtx, aes(genome_pos / 1e6, -log10(qval))) +
   geom_point(aes(colour = shade), size = 0.4) +
   geom_hline(yintercept = -log10(threshold), linetype = "dashed", colour = "red") +
   scale_colour_manual(values = c("grey20", "grey80"), guide = "none") +
   labs(x = "Genome pos (Mb)", y = "-log10(q)") +
   theme_classic()
+ggsave(paste0(OUTDIR,"/HWbaypass_xtx_scan.png"), width = 10, height = 5)
 
-ggsave(paste0(OUTDIR,"/baypass_xtx_scan.png"), width = 10, height = 5)
-
-ggsave(paste0(OUTDIR,"/baypass_xtx_scan.png"), width = 10, height = 5)
 
 # PI across genome
 pi2 <- chosenSites |> mutate(POS = (BIN_START + BIN_END) / 2) %>% 
