@@ -110,14 +110,7 @@ ggsave(paste0(OUTDIR,"/fst_genome scan_", pop1, "_vs_", pop2, ".png"), width = 1
 
 # looking at XtX
 
-snps <- read_tsv("Lottia.baypass.snps.txt", header = TRUE, check.names = FALSE)%>%
-  left_join(snps, by = "MRK") %>%
-  mutate(lp_high = pchisq(XtXst, npop, lower.tail = FALSE, log.p = TRUE), #
-         lp_low = pchisq(XtXst, npop, lower.tail = TRUE, log.p = TRUE),
-         direction = if_else(lp_high < lp_low, "high", "low"),
-         log10_p = -(pmin(lp_high, lp_low) + log(2)) / log(10),
-         pval = 10^(-log10_p),
-         qval = p.adjust(pval, method = "BH"))
+snps <- read_tsv("Lottia.baypass.snps.txt")
 
 snps$MRK<-rownames(snps)
 snps$MRK<-as.numeric(snps$MRK)
@@ -132,15 +125,13 @@ xtx <- read.table("Lottia_bp_2_summary_pi_xtx.out", header = TRUE, check.names =
          log10_p = -(pmin(lp_high, lp_low) + log(2)) / log(10),
          pval = 10^(-log10_p),
          qval = p.adjust(pval, method = "BH"))
-
-#xtx <- read.table("Lottia_bp_2_summary_pi_xtx.out", header = TRUE, check.names = FALSE) %>%
-  #left_join(snps, by = "MRK") 
 xtx <- xtx %>%
-  add_genome_pos()     ##recall above if reloaded R
+  add_genome_pos()
 
 sum(xtx$outlier)
 
 threshold <- quantile(xtx$qval, 0.001) # top 0.1% (smallest q)
+
 ggplot(xtx, aes(genome_pos / 1e6, -log10(qval))) +
   geom_point(aes(colour = shade), size = 0.4) +
   geom_hline(yintercept = -log10(threshold), linetype = "dashed", colour = "red") +
