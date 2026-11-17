@@ -48,11 +48,6 @@ ggsave(paste0(OUTDIR, "pi_by_pop.png"), plot = pi_plot, width = 12, height = 6)
 
 chosenSites <- pi |> filter(Population %in% c("ASU", "ROS"))
 
-#top_scaffold <- chosenSites %>%
- # count(CHROM, sort = TRUE) %>%
-  #slice(1) %>%
-  #pull(CHROM)
-
 scan_plot <- chosenSites %>%
   #filter(CHROM == top_scaffold) %>%
   ggplot(aes(BIN_START / 1e6, PI, colour = Site)) +
@@ -69,7 +64,11 @@ ggsave(paste0(OUTDIR, "Chrom1scan_plot_wrapped.png"), plot = scan_plot, width = 
 pop1 <- "ASU"   
 pop2 <- "ROS"
 
-
+## find overall Fst 
+env <- read_csv("sample_metadata.csv")
+pw  <- read_tsv("/users/i/t/itimberl/eco_genomics_projects/eco_genomics_2026/population_genomics/mydata/fst/pairwise_fst_summary.txt")
+pw <- pw |> filter(pop1=="ASU", pop2=="ROS")
+pw
 
 
 add_genome_pos <- function(df) {
